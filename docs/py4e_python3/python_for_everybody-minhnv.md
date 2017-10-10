@@ -38,6 +38,7 @@ Hai kỹ năng để trở thành một lập trình viên
 
 Các reserved words trong python dùng để giao tiếp với python:
 
+|-----|-----|--------|-----|------|
 | and | del | global | not | with |
 | as | elif | if | or | yield |
 | assert | else | import | pass |
