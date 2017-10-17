@@ -186,3 +186,315 @@ print(bigword, bigcount)
 - prompt: Khi một chương trình hiển thị một thông báo và tạm dừng cho người dùng gõ một số nhập vào chương trình.
 
  
+## Chương 3: Conditional execution
+
+### 3.1 Boolean expressions
+
+Một biểu thức boolean là một biểu thức đúng hoặc sai. Ví dụ: 
+
+```sh
+>>> 5 == 5
+True
+>>> 5 == 6
+False
+```
+
+True và False là giá trị đặc biệt thuộc class bool chứ chúng không phải là một chuỗi 
+
+```sh 
+>>> type(True)
+<class 'bool'>
+>>> type(False)
+<class 'bool'>
+```
+
+Toán tử `==` là một trong những toán tử so sánh. Ngoài ra có: 
+
+```sh 
+x != y	#x không bằng y  
+x > y	#x lớn hơn y
+x < y	#x nhỏ hơn y
+x >= y	#x lớn hơn hoặc bằng y
+x <= y  #x nhở hơn hoặc bằng y
+x is y	#x giống y
+x is not y #x không giống y
+```
+
+### 3.2 Logical operators
+
+Có 3 loại toán tử logic là and, or và not 
+
+``x > 0 and x < 10``
+
+là True khi x nằm trong khoảng từ 0 đến 10
+
+``n%2 == 0 or n%3 == 0``
+
+là True khi một trong hai biểu thức đúng. Tức là n chia hết cho 2 hoặc 3
+
+Cuối cùng toán tử not phủ nhận một biểu thức boolean. Vì thế nếu not (x>y) là True nếu x < y
+
+### 3.3 Conditional execution
+
+Ví dụ đơn giản của câu lệnh if 
+
+```sh
+if x > 0 :
+    print('x is positive')
+```
+
+Biểu thức boolean sau if gọi là điều kiện và kết thúc câu lệnh bằng dấu `:` và câu lệnh thực thi sau đó thụt vào 4 dấu cách
+
+Nếu điều kiện True thì thực hiện câu lệnh thực thi trong if ( nhưng khối lệnh thụt vào ) Nếu False thì sẽ bỏ qua khối lệnh đó   
+
+### 3.4 Alternative execution
+
+Hình thức thứ hai của câu lệnh if trong đó có hai khả năng. Ví dụ:
+
+```sh
+if x%2 == 0 :
+    print('x is even')
+else :
+	print('x is odd')
+```
+
+Nếu x chia hết cho 2 thì in ra mà hình `x is even` và ngược lại sẽ in ra màn hình `x is odd`
+
+### 3.5 Chained conditionals
+
+Đôi khi có nhiều hơn hai khả năng
+
+```sh
+if x < y:
+	print('x is less than y')
+elif x > y:
+	print('x is greater than y')
+else:
+	print('x and y are equal')
+```
+
+Nếu biểu thức `x < y` là True thì in ra màn hình `x is less than y`. Nếu `x < y` là False thì thực hiện kiểm tra biểu thức `x > y`. Nếu `x < y` laf True thì sẽ in ra màn hình `x is greater than y` ngược lại thì sẽ là trường hợp cuối cùng `x and y are equal`
+
+Không có giới hạn về số lượng các câu lệnh elif. 
+
+### 3.6 Nested conditionals
+
+Một điều kiện cũng có thể đặt trong điều kiện khác. Ví dụ 
+
+```sh
+if x == y:
+	print('x and y are equal')
+else:
+	if x < y:
+		print('x is less than y')
+	else:
+		print('x is greater than y')
+```
+
+Toán tử logic cung cấp một cách để đơn giản hóa các câu lệnh có điều kiện đặt lồng trong nhau:
+
+```sh
+if 0 < x:
+	if x < 10:
+		print('x is a positive single-digit number.')
+```
+
+Có thể thay bằng:
+
+```sh
+if 0 < x and x < 10:
+	print('x is a positive single-digit number.')
+```
+
+### 3.7 Catching exceptions using try and except
+
+Đây là một chương trình qui đổi từ độ F sang độ Catching
+
+```sh
+inp = input('Enter Fahrenheit Temperature: ')
+fahr = float(inp)
+cel = (fahr - 32.0) * 5.0 / 9.0
+print(cel)
+```
+
+Nếu chạy chương trình này và kiểu biến đầu vào không hợp lệ thì nó sẽ báo lỗi
+
+```sh
+python fahren.py
+Enter Fahrenheit Temperature:72
+22.22222222222222
+
+python fahren.py
+Enter Fahrenheit Temperature:fred
+Traceback (most recent call last):
+  File "fahren.py", line 2, in <module>
+    fahr = float(inp)
+ValueError: could not convert string to float: 'fred'
+```
+
+try và except được dùng để xử lý các lỗi ngoại lệ 
+
+```sh
+inp = input('Enter Fahrenheit Temperature:')
+try:
+	fahr = float(inp)
+	cel = (fahr - 32.0) * 5.0 / 9.0
+	print(cel)
+except:
+	print('Please enter a number')
+```
+
+Python bắt đầu bằng cách thực hiện chuỗi các câu lệnh trong khối try. Nếu không có lỗi gì nó sẽ bỏ qua khối except. Còn lại nếu khối try xảy ra lỗi Python sẽ thực thi câu lệnh trong khối except
+
+Kết quả:
+
+```sh
+python fahren2.py
+Enter Fahrenheit Temperature:72
+22.22222222222222
+
+
+python fahren2.py
+Enter Fahrenheit Temperature:fred
+Please enter a number
+```
+
+## Chương 5: Iteration
+
+### Updating variables
+
+Một mô hình phổ biến trong các câu lệnh gán là câu lệnh gán để cập nhật một biến, trong đó giá trị mới của biến phụ thuộc vào biến cũ.
+
+``x = x + 1``
+
+Điều này có nghĩa là "lấy giá trị hiện tại của x cộng 1 và sau đó cập nhật giá trị mới của x."
+
+Nếu bạn cố gắng cập nhật một biến không tồn tại nó sẽ báo lỗi. Bởi vì chưa gán một giá trị cho biến đó.
+
+```sh
+>>> x = x + 1
+NameError: name 'x' is not defined
+```
+
+Trước khi bạn có thể cập nhật một biến, bạn phải khởi tạo nó:
+
+```sh
+x = 0 
+x = x + 1
+```
+
+### The while statement
+
+```sh
+n = 5
+while n > 0:
+	print(n)
+	n = n - 1
+print('Blastoff!')
+```
+
+Đây là một chương trình đếm ngược từ 5 đến 1 và in ra màn hình `Blastoff`
+
+Nó có nghĩa là, "hiển thị giá trị của n và sau đó giảm giá trị của n đi giá trị bằng 1 cho đến khi giá trị của n > 0. Khi n = 0 thì dừng vòng lặp và hiển thị `Blastoff` "
+
+Quá trình làm việc trong vòng lặp while
+
+- 1.Đánh giá các điều kiện: True hay False
+- 2.Nếu điều kiện là False, thoát vòng lặp while và tiếp tục thực hiện câu lệnh tiếp theo
+- 3.Nếu điều kiện là đúng, thực hiện khối lệnh trong while và sau đó quay trở lại bước 1
+
+### Infinite loops
+
+Ví dụ một lòng lặp vô hạn:
+
+```sh
+n = 10
+while True:
+	print(n, end=' ')
+	n = n - 1
+print('Done!')
+```
+
+Ví dụ: giả sử bạn muốn nhập dữ liệu từ người dùng cho đến khi chúng ta nhập `done`
+
+```sh
+while True:
+	line = input('> ')
+	if line == 'done':
+		break
+	print(line)
+print('Done!')
+```
+
+Vòng lặp sẽ kết thúc khi gặp `break`
+
+Kết quả:
+
+```sh 
+> hello there
+hello there
+> finished
+finished
+> done
+Done!
+```
+
+### Finishing iterations with continue
+
+Đôi khi bạn đang lặp lại một vòng lặp và muốn kết thúc vòng lặp lại hiện tại và ngay lập tức nhảy tới lần lặp kế tiếp
+
+Trong trường hợp đó, bạn có thể sử dụng câu lệnh continue để bỏ qua lần lặp kế tiếp mà không cần hoàn thành phần thân của vòng lặp cho lần lặp hiện tại.
+
+Dưới đây là ví dụ về một vòng lặp sao chép dữ liệu đầu vào của nó cho đến khi người dùng nhập "done", nhưng dòng bắt đầu bằng kí tự # sẽ không được in ra màn hình:
+
+```sh
+while True:
+	line = input('>
+	if line[0] == '#
+		continue
+	if line == 'done
+		break
+	print(line)
+print('Done!')
+```
+
+Kết quả:
+
+```sh
+> hello there
+hello there
+> # don't print this
+> print this!
+print this!
+> done
+Done!
+```
+
+Tất cả các dòng được in ngoại trừ một trong những bắt đầu với dấu # bởi vì khi continue được thực thi nó kết thúc vòng lặp hiện tại và chuyển sang vòng lặp tiếp theo nên sẽ bỏ qua lệnh print sau nó.
+
+### Definite loops using for
+
+Đôi khi chúng ta muốn lặp lại một loạt những thứ như một danh sách các từ, các dòng trong một tập tin, hoặc một danh sách các con số... Chúng ta có thể sử dụng vòng lặp xác định for
+
+Chúng ta sử dụng vòng lặp while là một vòng lặp không xác định bởi vì nó chỉ đơn giản là vòng lặp cho đến khi một điều kiện trở thành Sai, trong khi vòng lặp for lặp lại qua một tập hợp các mục được biết đến để nó chạy qua nhiều lần lặp vì có các mục trong tập hợp.
+
+Cú pháp của một vòng lặp for tương tự với vòng lặp while trong đó có một `statement` và một `loop body`
+
+```sh
+friends = ['Joseph', 'Glenn', 'Sally']
+for friend in friends:
+	print('Happy New Year:', friend)
+print('Done!')
+```
+
+Trong đó 
+
+Kết quả:
+
+```sh
+Happy New Year: Joseph
+Happy New Year: Glenn
+Happy New Year: Sally
+Done!
+```
+
