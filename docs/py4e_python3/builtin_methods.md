@@ -86,7 +86,7 @@ In [38]: class foo():
    ....:         return 0
    ....:     
 
-In [39]: obj1 = Count(2,3)
+In [39]: x = foo(2,3)
 
 In [40]: print(x.a)
 2
